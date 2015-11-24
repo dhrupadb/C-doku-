@@ -61,7 +61,7 @@ public:
         if (_data[i][j] < 0) {
           std::cout << "_\t";
         } else {
-          std::cout << "33[32;40m" << _data[i][j] << "33[0m" << "\t";
+          std::cout << '33[32;40m' << _data[i][j] << '33[0m' << "\t";
         }
       }
     std::cout << "\n";
