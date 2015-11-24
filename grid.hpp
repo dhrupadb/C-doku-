@@ -55,13 +55,19 @@ public:
     return false;
   }
 
+  /**
+  * Print function for the grid. -10 is a blank grid value. A negative number is a preset value of
+  * the original solution. A positive number is a user set value.
+  **/
   void print() {
     for(int i = 0; i < 9; i++) {
       for(int j = 0; j < 9; j++) {
-        if (_data[i][j] < 0) {
+        if (_data[i][j] == -10) {
           std::cout << "_\t";
+        } else if (_data[i][j] < 0) {
+          std::cout << "\33[0;31m" << _data[i][j]*-1 << "\33[0m" << "\t";
         } else {
-          std::cout << "\33[32;40m" << _data[i][j] << "\33[0m" << "\t";
+          std::cout << _data[i][j] << "\t";
         }
       }
     std::cout << "\n";
