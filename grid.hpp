@@ -62,15 +62,11 @@ public:
   void print() {
     for(int i = -1; i < 9; i++) {
       if (i == -1) {
-        std::cout << "\t";
-        for (int j = 65; j < 74; j++ ) {
-          std::cout << "\33[0;31m" << char(j) << "\33[0m" << "\t";
-        }
-        std::cout << "\n";
+        printLetters();
       } else {
         for(int j = -1; j < 9; j++) {
           if (j == -1) {
-            std::cout << "\33[0;31m" << i << "\33[0m" << "\t";
+            printNumber(i);
             continue;
           }
           if (_data[i][j] == -10) {
@@ -94,5 +90,18 @@ public:
   void set(int i, int j, int val) {
     assert(i < 9 && i >= 0 && j < 9 && j >= 0);
     _data[i][j] = val;
+  }
+
+private:
+  void printLetters() {
+    std::cout << "\t";
+    for (int j = 65; j < 74; j++ ) {
+      std::cout << "\33[0;31m" << char(j) << "\33[0m" << "\t";
+    }
+    std::cout << "\n";
+  }
+
+  void printNumber(int i) {
+    std::cout << "\33[0;31m" << i << "\33[0m" << "\t";
   }
 };
