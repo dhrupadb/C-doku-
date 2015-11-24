@@ -60,17 +60,29 @@ public:
   * the original solution. A positive number is a user set value.
   **/
   void print() {
-    for(int i = 0; i < 9; i++) {
-      for(int j = 0; j < 9; j++) {
-        if (_data[i][j] == -10) {
-          std::cout << "_\t";
-        } else if (_data[i][j] < 0) {
-          std::cout << "\33[32;40m" << _data[i][j]*-1 << "\33[0m" << "\t";
-        } else {
-          std::cout << _data[i][j] << "\t";
+    for(int i = -1; i < 9; i++) {
+      if (i == -1) {
+        std::cout << "\t";
+        for (int j = 65; j < 74; j++ ) {
+          std::cout << "\33[0;31m" << char(j) << "\33[0m" << "\t";
+        }
+        std::cout << "\n";
+      } else {
+        for(int j = -1; j < 9; j++) {
+          if (j == -1) {
+            std::cout << "\33[0;31m" << i << "\33[0m" << "\t";
+            continue;
+          }
+          if (_data[i][j] == -10) {
+            std::cout << "_\t";
+          } else if (_data[i][j] < 0) {
+            std::cout << "\33[32;40m" << _data[i][j]*-1 << "\33[0m" << "\t";
+          } else {
+            std::cout << _data[i][j] << "\t";
+          }
         }
       }
-    std::cout << "\n";
+      std::cout << "\n";
     }
   }
 
