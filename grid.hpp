@@ -70,9 +70,9 @@ public:
             continue;
           }
           if (_data[i][j] == -10) {
-            std::cout << "_\t";
+            std::cout << "__\t";
           } else if (_data[i][j] < 0) {
-            std::cout << "\33[32;40m" << _data[i][j]*-1 << "\33[0m" << "\t";
+            printGreen(_data[i][j]*-1);
           } else {
             std::cout << _data[i][j] << "\t";
           }
@@ -96,12 +96,24 @@ private:
   void printLetters() {
     std::cout << "\t";
     for (int j = 65; j < 74; j++ ) {
-      std::cout << "\33[0;31m" << char(j) << "\33[0m" << "\t";
+      printRed(j);
     }
     std::cout << "\n";
   }
 
   void printNumber(int i) {
-    std::cout << "\33[0;31m" << i << "\33[0m" << "\t";
+    printRed(i);
+  }
+
+  void printGreen(int data) {
+    std::cout << "\33[32;40m" << data << "\33[0m" << "\t";
+  }
+
+  void printRed(int data) {
+    if (data > 10) {
+      std::cout << "\33[0;31m" << char(data) << "\33[0m" << "\t";
+    } else {
+      std::cout << "\33[0;31m" << data << "\33[0m" << "\t";
+    }
   }
 };

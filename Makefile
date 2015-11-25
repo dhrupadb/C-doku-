@@ -1,17 +1,23 @@
 CXXFLAGS=-std=c++11 -g -fPIC
 
-TARGETS = generator test_grid
-OBJS=generator.o test_grid.o
+TARGETS = test_grid test_utils test_gen cdokupp
+OBJS=test_grid.o test_utils.o test_gen.o driver.o
 
 all: $(TARGETS)
 
-generator: generator.o
-	g++ -o generator generator.o $(CXXFLAGS)
+cdokupp: driver.o
+	g++ -o cdokupp driver.o $(CXXFLAGS)
 
 test_grid: test_grid.o
 	g++ -o test_grid test_grid.o $(CXXFLAGS)
 
-%.o: %.cpp generator.hpp grid.hpp
+test_utils: test_utils.o
+	g++ -o test_utils test_utils.o $(CXXFLAGS)
+
+test_gen: test_gen.o
+	g++ -o test_gen test_gen.o $(CXXFLAGS)
+
+%.o: %.cpp generator.hpp grid.hpp utils.hpp
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 clean:
