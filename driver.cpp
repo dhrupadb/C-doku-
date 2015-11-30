@@ -43,12 +43,13 @@ int main() {
 	Grid g = Generator::getGrid(difficulty);
 	g.print();
 	while (move_count > 0) {
-		std::cout << "\nEnter a move \n";
+		std::cout << "\nEnter a move (or 'quit' to quit the game) \n";
 		std::string cmd;
 		std::cin >> cmd; 
 		// Command needs to be parsed and a valid move made if command is valid
 		// move_count decremented when valid move is made
 		// Valid move is also a move which doesn't break Sudoku invariant
+        if (cmd == "quit") return 0;
 		std::cout << std::endl;
 		g.print();
 		std::cout << std::endl;
