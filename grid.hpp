@@ -13,7 +13,17 @@ public:
     _data.resize(9, std::vector<int>(9,0));
   }
 
-  Grid(const Grid &g);
+  Grid(const Grid &g) {
+    if (g._data.size() != 9 && g._data[0].size() != 9) {
+      return;
+    }
+    _data.resize(9, std::vector<int>(9,0));
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
+        _data[i][j] = g._data[i][j];
+      }
+    }
+  }
 
   void operator= (const Grid &g) {
     if (g._data.size() != 9 && g._data[0].size() != 9) {
