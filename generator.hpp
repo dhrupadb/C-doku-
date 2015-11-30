@@ -2,6 +2,7 @@
 
 #include "grid.hpp"
 #include "utils.hpp"
+#include "solver.hpp"
 
 #include <cassert>
 #include <vector>
@@ -12,6 +13,7 @@
 #define EASY_NUM 24
 #define MEDIUM_NUM 30
 #define HARD_NUM 40
+#define PRESETS 10
 
 class Generator{
 
@@ -26,19 +28,18 @@ private:
 	static void initializeGrid(Grid &g, int diff) {
 		setBlanks(g);
 		srand(time(NULL));
+        createValidGrid(g, PRESETS);
+        
+        /* TODO: find a way to store the solution
+        Grid solution = g;
+        std::cout << "Default solution: \n";
+        solution.print();
+        */
+        eraseCells(g, diff);
+	}
 
-		// TODO: Add actual logic to populate the board. 
-		setRow(g, getRandom(), 0);
-		setRow(g, getRandom(), 1);
-		setRow(g, getRandom(), 2);
-		setRow(g, getRandom(), 3);
-		setRow(g, getRandom(), 4);
-		setRow(g, getRandom(), 5);
-		setRow(g, getRandom(), 6);
-		setRow(g, getRandom(), 7);
-		setRow(g, getRandom(), 8);
-
-		// Removes random spots on the grid based on difficulty rating
+    // Removes random spots on the grid based on difficulty rating
+    static void eraseCells(Grid &g, int diff) {
 		int count = 0;
 		if (diff == EASY) {
 			count = EASY_NUM;
@@ -56,7 +57,29 @@ private:
 				count--;
 			}
 		}
-	}
+    }
+
+    // fill the grid will a full, valid sudoku
+    static void createValidGrid(Grid &g, int presets) {
+        while (presets > 0) {
+            int x = std::rand()%9;
+            int y = std::rand()%9;
+            if (g[x][y] != -10) continue;
+            // choose an empty cell to set
+            std::vector<int> vec = getRandom();
+            for (int i = 0; i < 9; i++) {
+                if (Solver::isValidMove(vec[i], g, x, y)) {
+                    g.set(x,y,vec[i]);
+                    if (Solver::hasSolution(g)) {
+                        presets--;
+                        break;
+                    }
+                    g.set(x,y,-10);
+                }
+            }
+        }
+        g = Solver::getSolution(g);
+    }
 
 	static void setBlanks(Grid &g) {
 		for (int i = 0; i < 9; i++) {
