@@ -17,7 +17,7 @@ test_utils: test_utils.o
 test_gen: test_gen.o
 	g++ -o test_gen test_gen.o $(CXXFLAGS)
 
-%.o: %.cpp generator.hpp grid.hpp utils.hpp
+%.o: %.cpp generator.hpp grid.hpp utils.hpp solver.hpp
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 clean:
