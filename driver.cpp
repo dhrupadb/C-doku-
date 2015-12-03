@@ -3,6 +3,7 @@
 #include <string>
 
 #include "generator.hpp"
+#include "solver.hpp"
 
 #define EASY 1
 #define MEDIUM 2
@@ -43,13 +44,31 @@ int main() {
 	Grid g = Generator::getGrid(difficulty);
 	g.print();
 	while (move_count > 0) {
-		std::cout << "\nEnter a move (or 'quit' to quit the game) \n";
+		std::cout << "\nEnter a move (or 'quit' to quit the game; 'solve' to get the solution) \n";
 		std::string cmd;
 		std::cin >> cmd; 
 		// Command needs to be parsed and a valid move made if command is valid
 		// move_count decremented when valid move is made
 		// Valid move is also a move which doesn't break Sudoku invariant
-        if (cmd == "quit") return 0;
+        if (cmd == "quit" || cmd == "Quit" || cmd == "QUIT") return 0;
+        if (cmd == "Solve" || cmd == "solve" || cmd == "SOLVE") {
+        	std::cout << "Are you sure ? \" Y / N \"" << std::endl;
+        	std::string ans;
+        	std::cin >> ans;
+        	std::cout << std::endl;
+        	if (ans == "Y" || ans == "y") {
+        		Grid solved = Solver::getSolution(g);
+        		solved.print();
+        		std::cout << std::endl;
+        		return 0;
+        	}
+        }
+        /*std::vector<std::string> tokens;
+        tokenize(cmd, tokens);
+        if (tokens.size() > 3) {
+        	std::cout << "Invalid Command. Retry \n";
+        	continue;
+        }*/
 		std::cout << std::endl;
 		g.print();
 		std::cout << std::endl;
