@@ -15,11 +15,6 @@ public:
         return dup;
     }
 
-    static int verifyAnswer(Grid &g) {
-        //TODO: implement logic to check the validity of a fully filled grid
-        return 1;
-    }
-
     static int isValidMove(int number, Grid &g, int row, int col) {
         int sqRow = 3*(row/3);
         int sqCol = 3*(col/3);
