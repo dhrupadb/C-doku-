@@ -31,7 +31,7 @@ public:
         if (abs(g[sqRow+row1][sqCol+col1]) == number) return 0;
         if (abs(g[sqRow+row2][sqCol+col1]) == number) return 0;
         if (abs(g[sqRow+row1][sqCol+col2]) == number) return 0;
-        if (abs(g[sqRow+row2][sqCol+col2] == number)) return 0;
+        if (abs(g[sqRow+row2][sqCol+col2]) == number) return 0;
         
 	return 1;
     }
