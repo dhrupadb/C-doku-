@@ -24,7 +24,8 @@ Pick a difficulty level from the following
 
 ### Step 2
 Use the following syntax to pic a location on the grid and set the number
-<Column letter> <Row Number> <Number to be set to>
+"Column letter, Row Number, Number to be set to"
+For example, input "A,0,9" to put number 9 in the first cell.
 
 ### Step 3
 Repeat till grid is completed
