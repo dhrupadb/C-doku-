@@ -21,6 +21,14 @@ public:
 	static Grid getGrid(int diff) {
 		Grid g = Grid();
 		initializeGrid(g, diff);
+		for(int i=0; i< 9; i++) {
+		  for(int j=0; j<9; j++) {
+		    int val = g[i][j];
+		    if(val != -10) {
+		      g.set(i,j,-val);
+		    }
+		  }
+		}
 		return g;
 	}
 

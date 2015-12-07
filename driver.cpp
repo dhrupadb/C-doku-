@@ -41,11 +41,12 @@ static std::vector<int> moveParser(std::string command) {
   return retVal;
 }
 
-static bool canUpdate(Grid &g, int row, int col) {
-  if(Solver::isValidMove) {
-    if(g[row][col] > 0) {
+static bool canUpdate(Grid &g, int row, int col, int move) {
+  if(Solver::isValidMove(move, g, row, col)) {
+    /* if(g[row][col] > 0) {
       return true;
-    }
+      }*/
+    return true;
   }
   return false;
 }
@@ -56,14 +57,26 @@ static bool validCmd(std::string command) {
   if(command.compare("quit")==0 || command.compare("solve") == 0) {
     return true;
   }
+
+  std::string firstChar;
+  std::string secondChar;
+  std::string thirdChar;
+  int firstNum;
+  int secondNum;
   //command format "column row number"
-  std::string firstChar = command.substr(0,1);
-  std::transform(firstChar.begin(), firstChar.end(), firstChar.begin(), tolower);
-  std::string secondChar = command.substr(2,1);
-  int firstNum = stoi(secondChar);
-  std::string thirdChar = command.substr(4,1);
-  int secondNum = stoi(thirdChar);
-  if(firstChar > "i" || firstNum > 9 || firstNum < 0 || secondNum > 9 || secondNum < 0){
+  try {
+    firstChar  = command.substr(0,1);
+    std::transform(firstChar.begin(), firstChar.end(), firstChar.begin(), tolower);
+    secondChar = command.substr(2,1);
+    firstNum = stoi(secondChar);
+    thirdChar = command.substr(4,1);
+    secondNum = stoi(thirdChar);
+  } catch(std::exception &e) {
+    std::cout << "Invalid Command!" << std::endl;
+    return false;
+  }
+  if(firstChar > "i" || firstChar < "a" || firstNum > 9 || firstNum < 0 || secondNum > 9 || secondNum < 0){
+    std::cout << "Invalid Command!" << std::endl;
     return false;
   } else {
     return true;
@@ -129,7 +142,7 @@ int main() {
 	    }
 		  //parsedCmd is column,row,number to update
 	      std::vector<int> parsedCmd = moveParser(cmd);
-	      if(canUpdate) {
+	      if(canUpdate(g, parsedCmd[1],parsedCmd[0],parsedCmd[2])) {
 		g.set(parsedCmd[1],parsedCmd[0], parsedCmd[2]);
 		if(solved == g) {
 		  std::cout << "You win!";
@@ -139,6 +152,8 @@ int main() {
 		}
 		//go back to the beginning and keep playing
 		continue;
+	      } else {
+		std::cout << "Not a valid move!" << std::endl;
 	      }
 	  }
 }

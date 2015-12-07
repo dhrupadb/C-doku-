@@ -80,7 +80,7 @@ public:
             continue;
           }
           if (_data[i][j] == -10) {
-            std::cout << "__\t";
+            std::cout << "x \t";
           } else if (_data[i][j] < 0) {
             printGreen(_data[i][j]*-1);
           } else {
