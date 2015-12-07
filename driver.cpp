@@ -43,9 +43,6 @@ static std::vector<int> moveParser(std::string command) {
 
 static bool canUpdate(Grid &g, int row, int col, int move) {
   if(Solver::isValidMove(move, g, row, col)) {
-    /* if(g[row][col] > 0) {
-      return true;
-      }*/
     return true;
   }
   return false;
