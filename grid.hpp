@@ -82,7 +82,7 @@ public:
           if (_data[i][j] == -10) {
             std::cout << "\e[1m" << "x \t" << "\e[0m";
           } else if (_data[i][j] < 0) {
-            printGreen(_data[i][j]*-1);
+            printYellow(_data[i][j]*-1);
           } else {
             std::cout << _data[i][j] << "\t";
           }
@@ -116,8 +116,8 @@ private:
     printRed(i);
   }
 
-  void printGreen(int data) {
-    std::cout << "\33[32;40m" << data << "\33[0m" << "\t";
+  void printYellow(int data) {
+    std::cout << "\e[93m" << data << "\33[0m" << "\t";
   }
 
   void printRed(int data) {
