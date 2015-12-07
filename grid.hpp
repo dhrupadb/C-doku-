@@ -87,6 +87,7 @@ public:
             std::cout << _data[i][j] << "\t";
           }
         }
+	std::cout << std::endl;
       }
       std::cout << "\n";
     }

@@ -24,15 +24,16 @@ public:
         int col2 = (col+4)%3;
 
         for (int i = 0; i < 9; i++) {
-            if (i != col && g[row][i] == number) return 0;
-            if (i != row && g[i][col] == number) return 0; 
+	  if (i != col && abs(g[row][i]) == number) return 0;
+	  if (i != row && abs(g[i][col]) == number) return 0; 
         }
 
-        if (g[sqRow+row1][sqCol+col1] == number) return 0;
-        if (g[sqRow+row2][sqCol+col1] == number) return 0;
-        if (g[sqRow+row1][sqCol+col2] == number) return 0;
-        if (g[sqRow+row2][sqCol+col2] == number) return 0;
-        return 1;
+        if (abs(g[sqRow+row1][sqCol+col1]) == number) return 0;
+        if (abs(g[sqRow+row2][sqCol+col1]) == number) return 0;
+        if (abs(g[sqRow+row1][sqCol+col2]) == number) return 0;
+        if (abs(g[sqRow+row2][sqCol+col2] == number)) return 0;
+        
+	return 1;
     }
 
 private:
