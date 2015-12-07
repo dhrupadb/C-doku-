@@ -80,7 +80,7 @@ public:
             continue;
           }
           if (_data[i][j] == -10) {
-            std::cout << "x \t";
+            std::cout << "\e[1m" << "x \t" << "\e[0m";
           } else if (_data[i][j] < 0) {
             printGreen(_data[i][j]*-1);
           } else {
