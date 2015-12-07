@@ -142,8 +142,8 @@ int main() {
 	      if(canUpdate(g, parsedCmd[1],parsedCmd[0],parsedCmd[2])) {
 		g.set(parsedCmd[1],parsedCmd[0], parsedCmd[2]);
 		if(solved == g) {
-		  std::cout << "You win!";
-		  solved.print();
+			solved.print();
+		  std::cout << "SUCCESS! GRID COMPLETED" << std::endl;
 		  std::cout << std::endl;
 		  return 0;
 		}
